@@ -220,4 +220,14 @@ manhattan <- function(x, chr="CHR", bp="BP", p="P", snp="SNP",
         }
     }  
     par(xpd = FALSE)
+    
+    # Adds labels for the top hits: black text for significant, gray for suggestive
+	for (i in 1:dim(d)[1]) {
+		if(d[i,]$logp >= genomewideline) {
+			text(d[i,]$pos, d[i,]$logp, adj=c(-0.10,0.75), d[i,]$SNP, col="black")
+		}
+		else if(d[i,]$logp >= suggestiveline && d[i,]$logp < genomewideline) {
+			text(d[i,]$pos, d[i,]$logp, adj=c(-0.10,0.75), d[i,]$SNP, col="darkgray")
+		}
+	}
 }
